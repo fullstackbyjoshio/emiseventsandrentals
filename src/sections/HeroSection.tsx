@@ -85,7 +85,7 @@ export default function HeroSection() {
     }
   }, [])
 
-  // Scroll-driven EXIT animation
+  // Scroll-driven effects (parallax and fade out)
   useEffect(() => {
     const section = sectionRef.current
     if (!section) return
@@ -94,55 +94,23 @@ export default function HeroSection() {
       scrollTrigger: {
         trigger: section,
         start: 'top top',
-        end: '+=130%',
-        pin: true,
+        end: 'bottom top',
         scrub: 0.6,
-        onLeaveBack: () => {
-          // Reset all elements to visible when scrolling back to top
-          gsap.set([imageRef.current, ruleRef.current, eyebrowRef.current, ...headlineRefs.current, bodyRef.current, ctaRef.current, starRef.current], {
-            opacity: 1, x: 0, y: 0
-          })
-        }
       },
     })
 
-    // ENTRANCE (0% - 30%): subtle parallax only (entrance done on load)
-    scrollTl.fromTo(
+    // Parallax for the image as you scroll
+    scrollTl.to(
       imageRef.current,
-      { y: 0 },
-      { y: '-2vh', ease: 'none' },
+      { y: '10vh', ease: 'none' },
       0
     )
 
-    // SETTLE (30% - 70%): hold position
-
-    // EXIT (70% - 100%)
-    scrollTl.fromTo(
-      headlineRefs.current,
-      { x: 0, opacity: 1 },
-      { x: '18vw', opacity: 0, ease: 'power2.in' },
-      0.7
-    )
-
-    scrollTl.fromTo(
-      [bodyRef.current, ctaRef.current],
-      { y: 0, opacity: 1 },
-      { y: '10vh', opacity: 0, ease: 'power2.in' },
-      0.72
-    )
-
-    scrollTl.fromTo(
-      imageRef.current,
-      { x: 0, opacity: 1 },
-      { x: '-18vw', opacity: 0, ease: 'power2.in' },
-      0.75
-    )
-
-    scrollTl.fromTo(
-      [ruleRef.current, eyebrowRef.current, starRef.current],
-      { opacity: 1 },
-      { opacity: 0, ease: 'power2.in' },
-      0.75
+    // Fade out elements as they leave the top
+    scrollTl.to(
+      [ruleRef.current, eyebrowRef.current, ...headlineRefs.current, bodyRef.current, ctaRef.current, starRef.current],
+      { opacity: 0, y: -20, stagger: 0.02, ease: 'none' },
+      0.2
     )
 
     return () => {
@@ -152,6 +120,7 @@ export default function HeroSection() {
         .forEach(st => st.kill())
     }
   }, [])
+
 
   const headlineLines = ['Your', 'Event,', 'Our Commitment', 'to Perfection.']
 

@@ -43,118 +43,77 @@ export default function SplitSection({
 
     const imageEl = imageRef.current
     const isImageLeft = imagePosition === 'left'
-    const imageEnterX = isImageLeft ? '-55vw' : '55vw'
-    const imageExitX = isImageLeft ? '-18vw' : '18vw'
-    const headlineExitX = isImageLeft ? '18vw' : '-18vw'
+    const imageEnterX = isImageLeft ? '-10vw' : '10vw'
 
-    const scrollTl = gsap.timeline({
+    // Create a timeline for the entrance animation
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top top',
-        end: '+=130%',
-        pin: true,
-        scrub: 0.6,
+        start: 'top 80%', // Start when top of section is 80% down the viewport
+        toggleActions: 'play none none reverse', // Play on enter, reverse on leave back
       },
     })
 
-    // ENTRANCE (0% - 30%)
     // Image slides in
-    scrollTl.fromTo(
+    tl.fromTo(
       imageEl,
       { x: imageEnterX, opacity: 0 },
-      { x: 0, opacity: 1, ease: 'power2.out' },
+      { x: 0, opacity: 1, duration: 1, ease: 'power2.out' },
       0
     )
 
     // Rule draws in
-    scrollTl.fromTo(
+    tl.fromTo(
       ruleRef.current,
       { scaleX: 0 },
-      { scaleX: 1, ease: 'power2.out' },
-      0.05
+      { scaleX: 1, duration: 0.8, ease: 'power2.out' },
+      0.2
     )
 
     // Label fades in
-    scrollTl.fromTo(
+    tl.fromTo(
       labelRef.current,
       { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, ease: 'power2.out' },
-      0.08
+      { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
+      0.3
     )
 
     // Headline lines stagger in
     headlineRefs.current.forEach((line, i) => {
       if (line) {
-        scrollTl.fromTo(
+        tl.fromTo(
           line,
-          { y: 70, opacity: 0 },
-          { y: 0, opacity: 1, ease: 'power2.out' },
-          0.1 + i * 0.03
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
+          0.4 + i * 0.1
         )
       }
     })
 
     // Body and CTA
-    scrollTl.fromTo(
-      bodyRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, ease: 'power2.out' },
-      0.2
-    )
-
-    scrollTl.fromTo(
-      ctaRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, ease: 'power2.out' },
-      0.22
+    tl.fromTo(
+      [bodyRef.current, ctaRef.current],
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' },
+      0.6
     )
 
     // Star
-    scrollTl.fromTo(
+    tl.fromTo(
       starRef.current,
       { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, ease: 'back.out(1.7)' },
-      0.25
-    )
-
-    // SETTLE (30% - 70%): hold
-
-    // EXIT (70% - 100%)
-    scrollTl.fromTo(
-      headlineRefs.current,
-      { x: 0, opacity: 1 },
-      { x: headlineExitX, opacity: 0, ease: 'power2.in' },
-      0.7
-    )
-
-    scrollTl.fromTo(
-      imageEl,
-      { x: 0, opacity: 1 },
-      { x: imageExitX, opacity: 0.35, ease: 'power2.in' },
-      0.7
-    )
-
-    scrollTl.fromTo(
-      [bodyRef.current, ctaRef.current],
-      { y: 0, opacity: 1 },
-      { y: '10vh', opacity: 0, ease: 'power2.in' },
-      0.72
-    )
-
-    scrollTl.fromTo(
-      [ruleRef.current, labelRef.current, starRef.current],
-      { opacity: 1 },
-      { opacity: 0, ease: 'power2.in' },
-      0.75
+      { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)' },
+      0.8
     )
 
     return () => {
-      scrollTl.kill()
+      tl.kill()
       ScrollTrigger.getAll()
         .filter((st) => st.vars.trigger === section)
         .forEach((st) => st.kill())
     }
   }, [imagePosition])
+
 
   const ImagePanel = (
     <div

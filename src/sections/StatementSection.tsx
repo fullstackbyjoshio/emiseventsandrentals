@@ -29,95 +29,62 @@ export default function StatementSection({
     const section = sectionRef.current
     if (!section) return
 
-    const scrollTl = gsap.timeline({
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top top',
-        end: '+=130%',
-        pin: true,
-        scrub: 0.6,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
       },
     })
 
-    // ENTRANCE (0% - 30%)
     // Image scale settles
-    scrollTl.fromTo(
+    tl.fromTo(
       imageContainerRef.current,
-      { scale: 1.1 },
-      { scale: 1, ease: 'none' },
+      { scale: 1.1, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' },
       0
     )
 
     // Gold rule draws in
-    scrollTl.fromTo(
+    tl.fromTo(
       ruleRef.current,
       { scaleX: 0 },
-      { scaleX: 1, ease: 'power2.out' },
-      0.05
+      { scaleX: 1, duration: 0.8, ease: 'power2.out' },
+      0.3
     )
 
     // Headline rises in
-    scrollTl.fromTo(
+    tl.fromTo(
       headlineRef.current,
       { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, ease: 'power2.out' },
-      0.1
+      { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
+      0.4
     )
 
     // Subheadline rises in
-    scrollTl.fromTo(
+    tl.fromTo(
       subheadlineRef.current,
       { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, ease: 'power2.out' },
-      0.15
+      { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
+      0.6
     )
 
     // Star fades in
-    scrollTl.fromTo(
+    tl.fromTo(
       starRef.current,
       { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, ease: 'back.out(1.7)' },
-      0.2
-    )
-
-    // SETTLE (30% - 70%): elements hold position
-
-    // EXIT (70% - 100%)
-    scrollTl.fromTo(
-      headlineRef.current,
-      { y: 0, opacity: 1 },
-      { y: '-26vh', opacity: 0, ease: 'power2.in' },
-      0.7
-    )
-
-    scrollTl.fromTo(
-      subheadlineRef.current,
-      { y: 0, opacity: 1 },
-      { y: '-20vh', opacity: 0, ease: 'power2.in' },
-      0.72
-    )
-
-    scrollTl.fromTo(
-      imageContainerRef.current,
-      { x: 0, opacity: 1 },
-      { x: '-10vw', opacity: 0.35, ease: 'power2.in' },
-      0.7
-    )
-
-    scrollTl.fromTo(
-      [ruleRef.current, starRef.current],
-      { opacity: 1 },
-      { opacity: 0, ease: 'power2.in' },
-      0.75
+      { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)' },
+      0.8
     )
 
     return () => {
-      scrollTl.kill()
+      tl.kill()
       ScrollTrigger.getAll()
         .filter((st) => st.vars.trigger === section)
         .forEach((st) => st.kill())
     }
   }, [])
+
 
   return (
     <section
