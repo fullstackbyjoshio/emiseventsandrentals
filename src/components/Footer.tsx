@@ -41,7 +41,9 @@ export default function Footer() {
                 <Music2 className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/emiseventandrentals?igsh=MTB0dHQ3bmJsNjJnbQ%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold/20 transition-colors"
                 aria-label="Instagram"
               >
