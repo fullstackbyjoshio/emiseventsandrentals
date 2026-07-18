@@ -1,16 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import type { InventoryItem } from './inventoryTypes';
+import { generatedInventory } from './InventoryGenerated.ts';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Plus, Check, ShoppingBag, X } from 'lucide-react'
+import { Plus, Check, ShoppingBag, X, Minus } from 'lucide-react'
+import { useToast } from '../components/Toast'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Dynamically pick up every .jpg in /public at build time
-const imageModules = import.meta.glob('/public/*.jpg', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
+const imageModules = import.meta.glob('/public/*.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
 
-// ---------------------------------------------------------------------------
-// Categories
-// ---------------------------------------------------------------------------
 const categories = [
   'All',
   'Tableware',
@@ -20,27 +19,18 @@ const categories = [
   'Catering Equipment',
 ]
 
-// ---------------------------------------------------------------------------
-// Static inventory items  (each image used at most once)
-// ---------------------------------------------------------------------------
-const inventoryItems = [
-  // ── Tableware ───────────────────────────────────────────────────────────────
+const inventoryItems: InventoryItem[] = [
   { id: 1, name: 'Flat Plate', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/inventory_tableware.jpg' },
-  { id: 2, name: 'Amala Bowl', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/statement_tablescape.jpg' },
-  { id: 3, name: 'Small Chops Bowl', price: '₦500', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/community_table_detail.jpg' },
-  { id: 4, name: 'Charger Plate', price: '₦200', unit: 'per piece', category: 'Tableware', image: '/wine-bowl.jpg' },
+  { id: 2, name: 'Amala Bowl', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/Amala-Bowl.jpg' },
+  { id: 3, name: 'Charger Plate', price: '₦500', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/community_table_detail.jpg' },
+  { id: 4, name: 'Wine Bowl', price: '₦200', unit: 'per piece', category: 'Tableware', image: '/wine-bowl.jpg' },
   { id: 5, name: 'Wine Bowl', price: '₦1,500', unit: 'per piece', category: 'Tableware', image: '/serving-dish-2.jpg' },
-  { id: 6, name: 'Serving Dish', price: '₦2,000', unit: 'per piece', category: 'Tableware', image: '/Serving-dish-1.jpg' },
-  // ── Fabrics & Linens ────────────────────────────────────────────────────────
+  { id: 6, name: 'Chaffing Dish', price: '₦2,000', unit: 'per piece', category: 'Tableware', image: '/Serving-dish-1.jpg' },
   { id: 7, name: 'Fabric (White)', price: '₦4,000', unit: 'per piece', category: 'Fabrics & Linens', image: '/inventory_textiles.jpg' },
   { id: 8, name: 'Chair Cover', price: '₦80', unit: 'per piece', category: 'Fabrics & Linens', image: '/service_chairs.jpg' },
   { id: 9, name: 'Table Cloth', price: '₦700', unit: 'per piece', category: 'Fabrics & Linens', image: '/Table-Cloth.jpg' },
-  // ── Chairs & Tables ─────────────────────────────────────────────────────────
-  { id: 10, name: 'Children Chiavari Chair', price: '₦800', unit: 'per 10 pcs', category: 'Chairs & Tables', image: '/community_table_detail.jpg' },
   { id: 11, name: 'Children Table', price: '₦500', unit: 'per piece', category: 'Chairs & Tables', image: '/styling_lounge.jpg' },
-  { id: 12, name: 'VIP Chair', price: '₦5,000', unit: 'per piece', category: 'Chairs & Tables', image: '/statement_tablescape.jpg' },
   { id: 33, name: 'Executive Chairs', price: '₦5,000', unit: 'per piece', category: 'Chairs & Tables', image: '/executiive-chairs.jpg' },
-  // ── Decor ───────────────────────────────────────────────────────────────────
   { id: 13, name: 'Flower', price: '₦7,500', unit: 'per piece', category: 'Decor', image: '/flower.jpg' },
   { id: 14, name: 'Flower Vase', price: '₦1,000', unit: 'per piece', category: 'Decor', image: '/Flower-vase.jpg' },
   { id: 15, name: 'Rafia Flower Vase with leafs', price: '₦20,000', unit: 'per piece', category: 'Decor', image: '/rafia-flower-vase.jpg' },
@@ -54,68 +44,129 @@ const inventoryItems = [
   { id: 23, name: '2-in-1 Vine Flower', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/2in1-vine-flower.jpg' },
   { id: 24, name: '3-Head Rose', price: '₦1,800', unit: 'per piece', category: 'Decor', image: '/3head-rose.jpg' },
   { id: 25, name: 'Cotton Flower', price: '₦6,500', unit: 'per piece', category: 'Decor', image: '/cotton-flower.jpg' },
-  { id: 26, name: 'Hand Fan', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/handfan.jpg' },
-  { id: 27, name: "Plastic Baby's Breath", price: '₦1,000', unit: 'per bunch', category: 'Decor', image: '/plastic-baby-breath.jpg' },
+  { id: 26, name: 'Rafia Fan', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/handfan.jpg' },
+  { id: 27, name: "Plastic Baby's Breath", price: '₦1,000', unit: 'per stem', category: 'Decor', image: '/plastic-baby-breath.jpg' },
   { id: 28, name: 'Process Bouquet', price: '₦12,000', unit: 'per piece', category: 'Decor', image: '/process_bouquet.jpg' },
   { id: 32, name: 'Party Popper', price: '₦2,000', unit: 'per piece', category: 'Decor', image: '/Party-popper.jpg' },
-  // ── Catering Equipment ──────────────────────────────────────────────────────
   { id: 29, name: 'Chafing Dish (Large)', price: '₦500', unit: 'per piece', category: 'Catering Equipment', image: '/statement_bar_cart.jpg' },
-  { id: 30, name: 'Chafing Dish (Small)', price: '₦250', unit: 'per piece', category: 'Catering Equipment', image: '/Cooling-Chest.jpg' },
-  { id: 31, name: 'Cooling Chest', price: '₦20,000', unit: 'per piece', category: 'Catering Equipment', image: '/inventory_tableware.jpg' },
+  { id: 31, name: 'Cooling Chest', price: '₦20,000', unit: 'per piece', category: 'Catering Equipment', image: '/Cooling-Chest.jpg' },
 ]
 
-// ---------------------------------------------------------------------------
-// Build a merged list: static items first, then any public/*.jpg not yet used
-// ---------------------------------------------------------------------------
+const uniqueStaticItemsMap = new Map<string, typeof inventoryItems[0]>()
+inventoryItems.forEach(item => {
+  const key = item.name.toLowerCase()
+  if (!uniqueStaticItemsMap.has(key)) {
+    uniqueStaticItemsMap.set(key, item)
+  }
+})
+const uniqueStaticItems = Array.from(uniqueStaticItemsMap.values())
+
 function buildAllItems() {
-  const usedImages = new Set(inventoryItems.map(i => i.image))
-  const extra: typeof inventoryItems = []
-  let nextId = Math.max(...inventoryItems.map(i => i.id)) + 1
+  const usedNames = new Set<string>(uniqueStaticItems.map((i: InventoryItem) => i.name.toLowerCase()))
+  const usedImages = new Set<string>(uniqueStaticItems.map((i: InventoryItem) => i.image))
+  const extra: InventoryItem[] = []
+  let nextId = Math.max(...uniqueStaticItems.map((i: InventoryItem) => i.id)) + 1
 
   Object.keys(imageModules).forEach(modulePath => {
-    const fileName = modulePath.split('/').pop()!             // e.g. "Gemini_Generated_Image_6hhbfb6hhbfb6hhb.jpg"
-    const publicUrl = '/' + fileName                          // e.g. "/Gemini_Generated_Image_..."
+    const fileName = modulePath.split('/').pop()!
+    const publicUrl = '/' + fileName
     if (!usedImages.has(publicUrl)) {
-      const rawName = fileName.replace(/\.jpg$/i, '')
+      const rawName = fileName.replace(/\.[^.]+$/i, '')
       const displayName = rawName
         .replace(/[_-]+/g, ' ')
         .replace(/\b\w/g, c => c.toUpperCase())
+      if (usedNames.has(displayName.toLowerCase())) return
       extra.push({
         id: nextId++,
         name: displayName,
-        price: 'Contact for price',
+        price: '₦1,000',
         unit: 'per piece',
         category: 'Uncategorized',
         image: publicUrl,
       })
+      usedNames.add(displayName.toLowerCase())
       usedImages.add(publicUrl)
     }
   })
 
-  return [...inventoryItems, ...extra]
+  const overrides: Record<string, Partial<InventoryItem>> = {
+    'Amala Bowl': { price: '₦1,000', unit: 'per dozen (12 pcs) for rent', category: 'Tableware' },
+    'Wooden Flower Vase': { price: '₦7,500', unit: 'for sale', category: 'Decor' },
+    'Small Flower Vase': { price: '₦2,000', unit: 'for sale', category: 'Decor' },
+    'Chapman Fruits Dispenser': { price: '₦10,000', unit: 'for rent', category: 'Catering Equipment' },
+    'Children Chairs': { price: '₦500', unit: 'per piece for rent', category: 'Chairs & Tables' },
+    'Candle Stand': { price: '₦12,000', unit: 'for sale', category: 'Decor' },
+    'Candle Light': { price: '₦1,500', unit: 'for sale', category: 'Decor' },
+  }
+  extra.forEach(item => {
+    const override = overrides[item.name]
+    if (override) {
+      if (override.price) item.price = override.price
+      if (override.unit) item.unit = override.unit
+    }
+  })
+  generatedInventory.splice(0, generatedInventory.length, ...extra)
+  return [...uniqueStaticItems, ...extra]
 }
-
 const allItems = buildAllItems()
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 export default function Inventory() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [cart, setCart] = useState<number[]>([])
+  const [cart, setCart] = useState<Record<number, number>>({}) // { [id]: quantity }
   const [showCart, setShowCart] = useState(false)
   const headerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
+  const toast = useToast()
 
   const filteredItems = activeCategory === 'All'
     ? allItems
     : allItems.filter(item => item.category === activeCategory)
 
+  const cartCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0)
+  const cartItemIds = Object.keys(cart).map(Number).filter(id => cart[id] > 0)
+  const cartItems = allItems.filter(item => cartItemIds.includes(item.id))
+
   const toggleCartItem = (id: number) => {
-    setCart(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id])
+    const item = allItems.find(i => i.id === id)
+    const isInCart = cart[id] && cart[id] > 0
+
+    if (isInCart) {
+      setCart(prev => {
+        const next = { ...prev }
+        delete next[id]
+        return next
+      })
+      toast.info('Removed', `${item?.name} removed from your selection.`)
+    } else {
+      setCart(prev => ({ ...prev, [id]: 1 }))
+      toast.success('Added to cart', `${item?.name} added to your selection.`)
+    }
   }
 
-  // Scroll animations
+  const updateQuantity = (id: number, delta: number) => {
+    setCart(prev => {
+      const current = prev[id] || 0
+      const nextQty = Math.max(1, current + delta)
+      return { ...prev, [id]: nextQty }
+    })
+  }
+
+  const removeFromCart = (id: number) => {
+    const item = allItems.find(i => i.id === id)
+    setCart(prev => {
+      const next = { ...prev }
+      delete next[id]
+      return next
+    })
+    toast.info('Removed', `${item?.name} removed from your selection.`)
+  }
+
+  const clearCart = () => {
+    if (cartCount === 0) return
+    setCart({})
+    toast.info('Cart cleared', 'All items have been removed.')
+  }
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -138,14 +189,37 @@ export default function Inventory() {
     return () => ctx.revert()
   }, [filteredItems])
 
-  const cartItems = allItems.filter(item => cart.includes(item.id))
-
   const sendInquiry = () => {
-    const items = cartItems.map(item => `• ${item.name} - ${item.price} ${item.unit}`).join('\n')
+    if (cartCount === 0) {
+      toast.error('Cart is empty', 'Select at least one item before sending an inquiry.')
+      return
+    }
+
+    const items = cartItems.map(item => {
+      const qty = cart[item.id]
+      return `• ${item.name} x${qty} — ${item.price} ${item.unit}`
+    }).join('\n')
+
     const text = encodeURIComponent(
       `🎉 NEW BOOKING INQUIRY - Emis Events & Rentals\n\n🛒 Equipment Needed:\n${items}\n\nPlease provide availability and pricing.`
     )
-    window.open(`https://wa.me/2348146056321?text=${text}`, '_blank')
+
+    toast.info('Opening WhatsApp…', 'Preparing your inquiry message.')
+
+    setTimeout(() => {
+      window.open(`https://wa.me/2348146056321?text=${text}`, '_blank')
+      toast.success(
+        'Inquiry sent!',
+        `${cartCount} item(s) ready in WhatsApp. Send the message to complete.`,
+        {
+          duration: 6000,
+          action: {
+            label: 'Keep browsing',
+            onClick: () => setShowCart(false),
+          },
+        }
+      )
+    }, 600)
   }
 
   return (
@@ -185,7 +259,6 @@ export default function Inventory() {
               key={item.id}
               className="inventory-card group bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Image — object-contain so original proportions are always respected */}
               <div className="relative flex items-center justify-center bg-white min-h-[200px] overflow-hidden">
                 <img
                   src={item.image}
@@ -195,12 +268,12 @@ export default function Inventory() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <button
                   onClick={() => toggleCartItem(item.id)}
-                  className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all ${cart.includes(item.id)
+                  className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all ${cart[item.id]
                     ? 'bg-plum text-white'
                     : 'bg-white/90 text-text-primary hover:bg-plum hover:text-white'
                     }`}
                 >
-                  {cart.includes(item.id) ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                  {cart[item.id] ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </button>
               </div>
 
@@ -218,7 +291,6 @@ export default function Inventory() {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredItems.length === 0 && (
           <div className="text-center py-20">
             <p className="font-body text-text-muted">No items found in this category.</p>
@@ -227,11 +299,11 @@ export default function Inventory() {
       </div>
 
       {/* Floating Cart Bar */}
-      {cart.length > 0 && (
+      {cartCount > 0 && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-plum text-white px-6 py-4 rounded-full shadow-xl flex items-center gap-4 animate-float">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
-            <span className="font-body text-sm font-medium">{cart.length} item(s) selected</span>
+            <span className="font-body text-sm font-medium">{cartCount} item(s) selected</span>
           </div>
           <button
             onClick={() => setShowCart(true)}
@@ -240,7 +312,7 @@ export default function Inventory() {
             Review
           </button>
           <button
-            onClick={() => setCart([])}
+            onClick={clearCart}
             className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
           >
             <X className="w-4 h-4" />
@@ -273,15 +345,35 @@ export default function Inventory() {
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-16 h-16 object-cover rounded-lg"
+                        className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
                       />
-                      <div className="flex-1">
-                        <h4 className="font-body font-medium text-text-primary">{item.name}</h4>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-body font-medium text-text-primary truncate">{item.name}</h4>
                         <p className="font-body text-sm text-plum">{item.price} {item.unit}</p>
+
+                        {/* Quantity Selector */}
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            onClick={() => updateQuantity(item.id, -1)}
+                            className="w-7 h-7 rounded-full border border-border flex items-center justify-center text-text-muted hover:border-plum hover:text-plum transition-colors"
+                            disabled={cart[item.id] <= 1}
+                          >
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="font-body text-sm font-semibold text-text-primary w-6 text-center">
+                            {cart[item.id]}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.id, 1)}
+                            className="w-7 h-7 rounded-full border border-border flex items-center justify-center text-text-muted hover:border-plum hover:text-plum transition-colors"
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                        </div>
                       </div>
                       <button
-                        onClick={() => toggleCartItem(item.id)}
-                        className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center hover:bg-red-100 transition-colors"
+                        onClick={() => removeFromCart(item.id)}
+                        className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center hover:bg-red-100 transition-colors flex-shrink-0"
                       >
                         <X className="w-4 h-4 text-red-500" />
                       </button>

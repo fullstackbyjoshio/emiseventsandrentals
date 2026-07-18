@@ -7,6 +7,11 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppFAB from './components/WhatsAppFAB'
 import LoadingScreen from './components/LoadingScreen'
+import { ToastProvider } from './components/Toast'
+
+// Vercel Analytics & Speed Insights
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 // Lazy load pages for performance
 const Home = lazy(() => import('./pages/Home'))
@@ -23,7 +28,6 @@ export default function App() {
   const [lenis, setLenis] = useState<Lenis | null>(null)
   const location = useLocation()
 
-  // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenisInstance = new Lenis({
       duration: 1.2,
@@ -32,8 +36,6 @@ export default function App() {
     })
 
     setLenis(lenisInstance)
-
-    // Connect Lenis to GSAP ScrollTrigger
     lenisInstance.on('scroll', ScrollTrigger.update)
 
     gsap.ticker.add((time) => {
@@ -48,7 +50,6 @@ export default function App() {
     }
   }, [])
 
-  // Scroll to top on route change
   useEffect(() => {
     if (lenis) {
       lenis.scrollTo(0, { immediate: true })
@@ -56,7 +57,6 @@ export default function App() {
     window.scrollTo(0, 0)
   }, [location.pathname, lenis])
 
-  // Loading screen
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
@@ -65,17 +65,13 @@ export default function App() {
   }, [])
 
   return (
-    <>
-      {/* Grain overlay */}
+    <ToastProvider>
       <div className="grain-overlay" aria-hidden="true" />
-      
-      {/* Loading screen */}
+
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-      
-      {/* Navigation */}
+
       <Navbar />
-      
-      {/* Main content */}
+
       <main>
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center bg-ivory">
@@ -92,12 +88,12 @@ export default function App() {
           </Routes>
         </Suspense>
       </main>
-      
-      {/* Footer */}
+
       <Footer />
-      
-      {/* WhatsApp Floating Button */}
       <WhatsAppFAB />
-    </>
+
+      <Analytics />
+      <SpeedInsights route={location.pathname} />
+    </ToastProvider>
   )
 }
