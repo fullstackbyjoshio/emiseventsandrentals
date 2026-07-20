@@ -1,9 +1,9 @@
 {
-  "cleanUrls": true,
-  "framework": "vite",
+  "cleanUrls": false,
+  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!robots\\.txt|sitemap\\.xml|og-image\\.jpg|.*\\.(js|css|svg|png|jpg|jpeg|webp|ico|woff|woff2|ttf|json)).*)",
       "destination": "/index.html"
     }
   ],
