@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ChevronRight } from 'lucide-react'
@@ -77,86 +78,108 @@ export default function Terms() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-ivory pt-24 pb-20">
-      <div className="max-w-4xl mx-auto px-6 lg:px-12">
-        {/* Header */}
-        <div ref={headerRef} className="mb-12">
-          <span className="label-upper text-text-muted mb-4 block">Legal</span>
-          <h1 className="font-display text-h1 text-text-primary mb-4">Terms & Conditions</h1>
-          <p className="font-body text-body-lg text-text-muted">
-            Please read these terms carefully before making a booking. By renting from Emis Events 
-            and Rentals, you agree to the following conditions.
-          </p>
-        </div>
+    <>
+      <Helmet>
+        <title>Terms & Conditions | Emis Events and Rentals</title>
+        <meta name="description" content="Read the terms and conditions for renting event equipment from Emis Events and Rentals. Rental period, payment, delivery, and damage policies." />
+        <meta name="keywords" content="event rental terms, rental conditions Nigeria, party equipment rental policy, event styling terms Ogun State" />
+        <link rel="canonical" href="https://emiseventsandrentals.com/terms" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Terms & Conditions | Emis Events and Rentals" />
+        <meta property="og:description" content="Read the terms and conditions for renting event equipment from Emis Events and Rentals." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://emiseventsandrentals.com/terms" />
+        <meta property="og:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Terms & Conditions | Emis Events and Rentals" />
+        <meta name="twitter:description" content="Read the terms and conditions for renting event equipment from Emis Events and Rentals." />
+        <meta name="twitter:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+      </Helmet>
 
-        {/* Terms List */}
-        <div ref={termsRef} className="space-y-4">
-          {terms.map((term, index) => (
-            <div
-              key={index}
-              className="term-item bg-white rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-plum/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="font-display text-sm text-plum">{index + 1}</span>
-                </div>
-                <div>
-                  <h3 className="font-display text-lg text-text-primary mb-2">{term.title}</h3>
-                  <p className="font-body text-sm text-text-muted leading-relaxed">
-                    {term.content}
-                  </p>
+      <div className="min-h-screen bg-ivory pt-24 pb-20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+          {/* Header */}
+          <div ref={headerRef} className="mb-12">
+            <span className="label-upper text-text-muted mb-4 block">Legal</span>
+            <h1 className="font-display text-h1 text-text-primary mb-4">Terms & Conditions</h1>
+            <p className="font-body text-body-lg text-text-muted">
+              Please read these terms carefully before making a booking. By renting from Emis Events 
+              and Rentals, you agree to the following conditions.
+            </p>
+          </div>
+
+          {/* Terms List */}
+          <div ref={termsRef} className="space-y-4">
+            {terms.map((term, index) => (
+              <div
+                key={index}
+                className="term-item bg-white rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-plum/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="font-display text-sm text-plum">{index + 1}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-text-primary mb-2">{term.title}</h3>
+                    <p className="font-body text-sm text-text-muted leading-relaxed">
+                      {term.content}
+                    </p>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* Contact CTA */}
+          <div className="mt-12 bg-plum rounded-2xl p-8 text-center">
+            <h2 className="font-display text-xl text-white mb-3">Have Questions?</h2>
+            <p className="font-body text-sm text-white/70 mb-6">
+              If you have any questions about our terms and conditions, please don't hesitate to contact us.
+            </p>
+            <a
+              href="https://wa.me/2348146056321?text=I%20have%20a%20question%20about%20your%20terms%20and%20conditions."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-plum font-body font-semibold rounded-full hover:bg-gold/90 transition-colors"
+            >
+              Contact Us
+              <ChevronRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Service Pricing Summary */}
+          <div className="mt-12">
+            <h2 className="font-display text-h2 text-text-primary mb-6">Service Pricing</h2>
+            <div className="bg-white rounded-xl shadow-card overflow-hidden">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-plum/5">
+                    <th className="text-left px-6 py-4 font-body text-xs uppercase tracking-wider text-text-muted">Service</th>
+                    <th className="text-right px-6 py-4 font-body text-xs uppercase tracking-wider text-text-muted">Price</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  <tr>
+                    <td className="px-6 py-4 font-body text-sm text-text-primary">Delivery (Ogun State)</td>
+                    <td className="px-6 py-4 font-body text-sm text-plum font-medium text-right">₦60,000 - ₦90,000</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-body text-sm text-text-primary">Setup/Breakdown Labor</td>
+                    <td className="px-6 py-4 font-body text-sm text-plum font-medium text-right">₦65,000/hour</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-body text-sm text-text-primary">Security Deposit</td>
+                    <td className="px-6 py-4 font-body text-sm text-plum font-medium text-right">10% of total (refundable)</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          ))}
-        </div>
-
-        {/* Contact CTA */}
-        <div className="mt-12 bg-plum rounded-2xl p-8 text-center">
-          <h2 className="font-display text-xl text-white mb-3">Have Questions?</h2>
-          <p className="font-body text-sm text-white/70 mb-6">
-            If you have any questions about our terms and conditions, please don't hesitate to contact us.
-          </p>
-          <a
-            href="https://wa.me/2348146056321?text=I%20have%20a%20question%20about%20your%20terms%20and%20conditions."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-plum font-body font-semibold rounded-full hover:bg-gold/90 transition-colors"
-          >
-            Contact Us
-            <ChevronRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* Service Pricing Summary */}
-        <div className="mt-12">
-          <h2 className="font-display text-h2 text-text-primary mb-6">Service Pricing</h2>
-          <div className="bg-white rounded-xl shadow-card overflow-hidden">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-plum/5">
-                  <th className="text-left px-6 py-4 font-body text-xs uppercase tracking-wider text-text-muted">Service</th>
-                  <th className="text-right px-6 py-4 font-body text-xs uppercase tracking-wider text-text-muted">Price</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                <tr>
-                  <td className="px-6 py-4 font-body text-sm text-text-primary">Delivery (Ogun State)</td>
-                  <td className="px-6 py-4 font-body text-sm text-plum font-medium text-right">₦60,000 - ₦90,000</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 font-body text-sm text-text-primary">Setup/Breakdown Labor</td>
-                  <td className="px-6 py-4 font-body text-sm text-plum font-medium text-right">₦65,000/hour</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 font-body text-sm text-text-primary">Security Deposit</td>
-                  <td className="px-6 py-4 font-body text-sm text-plum font-medium text-right">10% of total (refundable)</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

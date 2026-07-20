@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from '../sections/HeroSection'
@@ -120,45 +121,67 @@ export default function Home() {
 
 
   return (
-    <div className="relative">
-      {/* Section 1: Hero */}
-      <HeroSection />
+    <>
+      <Helmet>
+        <title>Event Rentals & Styling in Ogun State | Emis Events and Rentals</title>
+        <meta name="description" content="Premium event rentals, coordination, and styling in Ilisan Remo, Ogun State, Nigeria. Chairs, tents, decor & more. Book your event today." />
+        <meta name="keywords" content="event rentals, party rentals, wedding styling, Ogun State, Ilisan Remo, Nigeria, chair rental, tent rental, event decor" />
+        <link rel="canonical" href="https://emiseventsandrentals.com/" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Event Rentals & Styling in Ogun State | Emis Events and Rentals" />
+        <meta property="og:description" content="Premium event rentals, coordination, and styling in Ilisan Remo, Ogun State, Nigeria." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://emiseventsandrentals.com/" />
+        <meta property="og:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Event Rentals & Styling in Ogun State | Emis Events and Rentals" />
+        <meta name="twitter:description" content="Premium event rentals, coordination, and styling in Ilisan Remo, Ogun State, Nigeria." />
+        <meta name="twitter:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+      </Helmet>
 
-      {/* Section 2: Statement */}
-      <StatementSection {...sections.statement1} />
+      <div className="relative">
+        {/* Section 1: Hero */}
+        <HeroSection />
 
-      {/* Section 3: Split Left */}
-      <SplitSection {...sections.split1} />
+        {/* Section 2: Statement */}
+        <StatementSection {...sections.statement1} />
 
-      {/* Section 4: Split Right */}
-      <SplitSection {...sections.split2} />
+        {/* Section 3: Split Left */}
+        <SplitSection {...sections.split1} />
 
-      {/* Section 5: Split Left */}
-      <SplitSection {...sections.split3} />
+        {/* Section 4: Split Right */}
+        <SplitSection {...sections.split2} />
 
-      {/* Section 6: Statement */}
-      <StatementSection {...sections.statement2} />
+        {/* Section 5: Split Left */}
+        <SplitSection {...sections.split3} />
 
-      {/* Section 7: Split Right */}
-      <SplitSection {...sections.split4} />
+        {/* Section 6: Statement */}
+        <StatementSection {...sections.statement2} />
 
-      {/* Section 8: Split Left */}
-      <SplitSection {...sections.split5} />
+        {/* Section 7: Split Right */}
+        <SplitSection {...sections.split4} />
 
-      {/* Section 9: Split Right */}
-      <SplitSection {...sections.split6} />
+        {/* Section 8: Split Left */}
+        <SplitSection {...sections.split5} />
 
-      {/* Section 10: Split Left */}
-      <SplitSection {...sections.split7} />
+        {/* Section 9: Split Right */}
+        <SplitSection {...sections.split6} />
 
-      {/* Section 11: Split Right */}
-      <SplitSection {...sections.split8} />
+        {/* Section 10: Split Left */}
+        <SplitSection {...sections.split7} />
 
-      {/* Section 12: Statement */}
-      <StatementSection {...sections.statement3} />
+        {/* Section 11: Split Right */}
+        <SplitSection {...sections.split8} />
 
-      {/* Section 13: CTA (flowing, not pinned) */}
-      <CTASection />
-    </div>
+        {/* Section 12: Statement */}
+        <StatementSection {...sections.statement3} />
+
+        {/* Section 13: CTA (flowing, not pinned) */}
+        <CTASection />
+      </div>
+    </>
   )
 }

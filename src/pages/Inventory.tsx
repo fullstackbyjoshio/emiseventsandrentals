@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { gsap } from 'gsap'
 import type { InventoryItem } from './inventoryTypes';
 import { generatedInventory } from './InventoryGenerated.ts';
@@ -223,177 +224,199 @@ export default function Inventory() {
   }
 
   return (
-    <div className="min-h-screen bg-ivory pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <>
+      <Helmet>
+        <title>Inventory | Event Rentals - Chairs, Tables, Decor & More | Emis Events</title>
+        <meta name="description" content="Browse our curated collection of event rentals in Ogun State, Nigeria. Chairs, tables, linens, decor, tableware, and catering equipment for rent." />
+        <meta name="keywords" content="event rentals inventory, chair rental Nigeria, table rental Ogun State, wedding decor rental, linen rental, party equipment for rent" />
+        <link rel="canonical" href="https://emiseventsandrentals.com/inventory" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Inventory | Event Rentals - Chairs, Tables, Decor & More | Emis Events" />
+        <meta property="og:description" content="Browse our curated collection of event rentals in Ogun State, Nigeria. Chairs, tables, linens, decor, tableware, and catering equipment for rent." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://emiseventsandrentals.com/inventory" />
+        <meta property="og:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Inventory | Event Rentals - Chairs, Tables, Decor & More | Emis Events" />
+        <meta name="twitter:description" content="Browse our curated collection of event rentals in Ogun State, Nigeria. Chairs, tables, linens, decor, tableware, and catering equipment for rent." />
+        <meta name="twitter:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+      </Helmet>
 
-        {/* Header */}
-        <div ref={headerRef} className="mb-12">
-          <span className="label-upper text-text-muted mb-4 block">Our Collection</span>
-          <h1 className="font-display text-h1 text-text-primary mb-4">Inventory</h1>
-          <p className="font-body text-body-lg text-text-muted max-w-2xl">
-            Browse our curated collection of luxury event rentals. Each piece is inspected,
-            cleaned, and prepared to ensure your event looks flawless.
-          </p>
-        </div>
+      <div className="min-h-screen bg-ivory pt-24 pb-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-3 mb-10">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2.5 rounded-full font-body text-sm font-medium transition-all ${activeCategory === cat
-                ? 'bg-plum text-white shadow-plum'
-                : 'bg-white text-text-primary hover:bg-plum/10'
-                }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+          {/* Header */}
+          <div ref={headerRef} className="mb-12">
+            <span className="label-upper text-text-muted mb-4 block">Our Collection</span>
+            <h1 className="font-display text-h1 text-text-primary mb-4">Inventory</h1>
+            <p className="font-body text-body-lg text-text-muted max-w-2xl">
+              Browse our curated collection of luxury event rentals. Each piece is inspected,
+              cleaned, and prepared to ensure your event looks flawless.
+            </p>
+          </div>
 
-        {/* Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredItems.map(item => (
-            <div
-              key={item.id}
-              className="inventory-card group bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="relative flex items-center justify-center bg-white min-h-[200px] overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full max-h-[280px] object-contain group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <button
-                  onClick={() => toggleCartItem(item.id)}
-                  className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all ${cart[item.id]
-                    ? 'bg-plum text-white'
-                    : 'bg-white/90 text-text-primary hover:bg-plum hover:text-white'
-                    }`}
-                >
-                  {cart[item.id] ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                </button>
-              </div>
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-3 mb-10">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2.5 rounded-full font-body text-sm font-medium transition-all ${activeCategory === cat
+                  ? 'bg-plum text-white shadow-plum'
+                  : 'bg-white text-text-primary hover:bg-plum/10'
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
 
-              <div className="p-4">
-                <span className="font-body text-xs text-text-muted uppercase tracking-wider">
-                  {item.category}
-                </span>
-                <h3 className="font-display text-lg text-text-primary mt-1">{item.name}</h3>
-                <div className="flex items-baseline gap-2 mt-2">
-                  <span className="font-body font-semibold text-plum">{item.price}</span>
-                  <span className="font-body text-xs text-text-muted">{item.unit}</span>
+          {/* Grid */}
+          <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredItems.map(item => (
+              <div
+                key={item.id}
+                className="inventory-card group bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="relative flex items-center justify-center bg-white min-h-[200px] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full max-h-[280px] object-contain group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <button
+                    onClick={() => toggleCartItem(item.id)}
+                    className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all ${cart[item.id]
+                      ? 'bg-plum text-white'
+                      : 'bg-white/90 text-text-primary hover:bg-plum hover:text-white'
+                      }`}
+                  >
+                    {cart[item.id] ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                <div className="p-4">
+                  <span className="font-body text-xs text-text-muted uppercase tracking-wider">
+                    {item.category}
+                  </span>
+                  <h3 className="font-display text-lg text-text-primary mt-1">{item.name}</h3>
+                  <div className="flex items-baseline gap-2 mt-2">
+                    <span className="font-body font-semibold text-plum">{item.price}</span>
+                    <span className="font-body text-xs text-text-muted">{item.unit}</span>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {filteredItems.length === 0 && (
+            <div className="text-center py-20">
+              <p className="font-body text-text-muted">No items found in this category.</p>
             </div>
-          ))}
+          )}
         </div>
 
-        {filteredItems.length === 0 && (
-          <div className="text-center py-20">
-            <p className="font-body text-text-muted">No items found in this category.</p>
+        {/* Floating Cart Bar */}
+        {cartCount > 0 && (
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-plum text-white px-6 py-4 rounded-full shadow-xl flex items-center gap-4 animate-float">
+            <div className="flex items-center gap-2">
+              <ShoppingBag className="w-5 h-5" />
+              <span className="font-body text-sm font-medium">{cartCount} item(s) selected</span>
+            </div>
+            <button
+              onClick={() => setShowCart(true)}
+              className="px-4 py-1.5 bg-gold text-plum font-body text-sm font-semibold rounded-full hover:bg-gold/90 transition-colors"
+            >
+              Review
+            </button>
+            <button
+              onClick={clearCart}
+              className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {/* Cart Drawer */}
+        {showCart && (
+          <div className="fixed inset-0 z-50">
+            <div className="absolute inset-0 bg-black/50" onClick={() => setShowCart(false)} />
+            <div className="absolute right-0 top-0 h-full w-full max-w-md bg-ivory shadow-xl overflow-y-auto">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="font-display text-2xl text-text-primary">Your Selection</h2>
+                  <button
+                    onClick={() => setShowCart(false)}
+                    className="w-9 h-9 rounded-full bg-plum/10 flex items-center justify-center hover:bg-plum/20 transition-colors"
+                  >
+                    <X className="w-5 h-5 text-plum" />
+                  </button>
+                </div>
+
+                {cartItems.length === 0 ? (
+                  <p className="font-body text-text-muted text-center py-8">No items selected.</p>
+                ) : (
+                  <div className="space-y-4 mb-8">
+                    {cartItems.map(item => (
+                      <div key={item.id} className="flex items-center gap-4 bg-white p-4 rounded-lg">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-body font-medium text-text-primary truncate">{item.name}</h4>
+                          <p className="font-body text-sm text-plum">{item.price} {item.unit}</p>
+
+                          {/* Quantity Selector */}
+                          <div className="flex items-center gap-2 mt-2">
+                            <button
+                              onClick={() => updateQuantity(item.id, -1)}
+                              className="w-7 h-7 rounded-full border border-border flex items-center justify-center text-text-muted hover:border-plum hover:text-plum transition-colors"
+                              disabled={cart[item.id] <= 1}
+                            >
+                              <Minus className="w-3 h-3" />
+                            </button>
+                            <span className="font-body text-sm font-semibold text-text-primary w-6 text-center">
+                              {cart[item.id]}
+                            </span>
+                            <button
+                              onClick={() => updateQuantity(item.id, 1)}
+                              className="w-7 h-7 rounded-full border border-border flex items-center justify-center text-text-muted hover:border-plum hover:text-plum transition-colors"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </button>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center hover:bg-red-100 transition-colors flex-shrink-0"
+                        >
+                          <X className="w-4 h-4 text-red-500" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {cartItems.length > 0 && (
+                  <button
+                    onClick={sendInquiry}
+                    className="w-full py-4 bg-plum text-white font-body font-semibold rounded-full hover:bg-plum/90 transition-colors flex items-center justify-center gap-2"
+                  >
+                    Send Inquiry via WhatsApp
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         )}
       </div>
-
-      {/* Floating Cart Bar */}
-      {cartCount > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-plum text-white px-6 py-4 rounded-full shadow-xl flex items-center gap-4 animate-float">
-          <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5" />
-            <span className="font-body text-sm font-medium">{cartCount} item(s) selected</span>
-          </div>
-          <button
-            onClick={() => setShowCart(true)}
-            className="px-4 py-1.5 bg-gold text-plum font-body text-sm font-semibold rounded-full hover:bg-gold/90 transition-colors"
-          >
-            Review
-          </button>
-          <button
-            onClick={clearCart}
-            className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      )}
-
-      {/* Cart Drawer */}
-      {showCart && (
-        <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowCart(false)} />
-          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-ivory shadow-xl overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display text-2xl text-text-primary">Your Selection</h2>
-                <button
-                  onClick={() => setShowCart(false)}
-                  className="w-9 h-9 rounded-full bg-plum/10 flex items-center justify-center hover:bg-plum/20 transition-colors"
-                >
-                  <X className="w-5 h-5 text-plum" />
-                </button>
-              </div>
-
-              {cartItems.length === 0 ? (
-                <p className="font-body text-text-muted text-center py-8">No items selected.</p>
-              ) : (
-                <div className="space-y-4 mb-8">
-                  {cartItems.map(item => (
-                    <div key={item.id} className="flex items-center gap-4 bg-white p-4 rounded-lg">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-body font-medium text-text-primary truncate">{item.name}</h4>
-                        <p className="font-body text-sm text-plum">{item.price} {item.unit}</p>
-
-                        {/* Quantity Selector */}
-                        <div className="flex items-center gap-2 mt-2">
-                          <button
-                            onClick={() => updateQuantity(item.id, -1)}
-                            className="w-7 h-7 rounded-full border border-border flex items-center justify-center text-text-muted hover:border-plum hover:text-plum transition-colors"
-                            disabled={cart[item.id] <= 1}
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="font-body text-sm font-semibold text-text-primary w-6 text-center">
-                            {cart[item.id]}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(item.id, 1)}
-                            className="w-7 h-7 rounded-full border border-border flex items-center justify-center text-text-muted hover:border-plum hover:text-plum transition-colors"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center hover:bg-red-100 transition-colors flex-shrink-0"
-                      >
-                        <X className="w-4 h-4 text-red-500" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {cartItems.length > 0 && (
-                <button
-                  onClick={sendInquiry}
-                  className="w-full py-4 bg-plum text-white font-body font-semibold rounded-full hover:bg-plum/90 transition-colors flex items-center justify-center gap-2"
-                >
-                  Send Inquiry via WhatsApp
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   )
 }

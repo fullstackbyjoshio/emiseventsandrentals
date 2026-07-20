@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Sparkles, Calendar, Palette, Package, Truck, ArrowRight } from 'lucide-react'
@@ -87,97 +88,119 @@ export default function Services() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-ivory pt-24 pb-20">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div ref={headerRef} className="mb-16">
-          <span className="label-upper text-text-muted mb-4 block">What We Do</span>
-          <h1 className="font-display text-h1 text-text-primary mb-4">Our Services</h1>
-          <p className="font-body text-body-lg text-text-muted max-w-2xl">
-            From intimate gatherings to grand celebrations, we provide end-to-end event solutions 
-            that combine luxury rentals with expert styling and seamless coordination.
-          </p>
-        </div>
+    <>
+      <Helmet>
+        <title>Our Services | Event Coordination, Planning & Styling | Emis Events</title>
+        <meta name="description" content="Full-service event coordination, planning, styling, equipment rentals, and delivery in Ogun State, Nigeria. Weddings, corporate events, parties & more." />
+        <meta name="keywords" content="event coordination Nigeria, event planning Ogun State, event styling services, wedding planner Ilisan Remo, party setup services, event rental delivery" />
+        <link rel="canonical" href="https://emiseventsandrentals.com/services" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Our Services | Event Coordination, Planning & Styling | Emis Events" />
+        <meta property="og:description" content="Full-service event coordination, planning, styling, equipment rentals, and delivery in Ogun State, Nigeria." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://emiseventsandrentals.com/services" />
+        <meta property="og:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Our Services | Event Coordination, Planning & Styling | Emis Events" />
+        <meta name="twitter:description" content="Full-service event coordination, planning, styling, equipment rentals, and delivery in Ogun State, Nigeria." />
+        <meta name="twitter:image" content="https://emiseventsandrentals.com/og-image.jpg" />
+      </Helmet>
 
-        {/* Services Grid */}
-        <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="service-card group bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="w-12 h-12 rounded-full bg-plum/10 flex items-center justify-center mb-6 group-hover:bg-plum/20 transition-colors">
-                <service.icon className="w-6 h-6 text-plum" />
-              </div>
-              <h3 className="font-display text-xl text-text-primary mb-3">{service.title}</h3>
-              <p className="font-body text-sm text-text-muted leading-relaxed mb-6">
-                {service.description}
-              </p>
-              <ul className="space-y-2">
-                {service.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2 font-body text-sm text-text-primary">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Process Timeline */}
-        <div ref={processRef} className="mb-24">
-          <div className="text-center mb-12">
-            <span className="label-upper text-text-muted mb-4 block">How It Works</span>
-            <h2 className="font-display text-h2 text-text-primary">Our Process</h2>
+      <div className="min-h-screen bg-ivory pt-24 pb-20">
+        {/* Header */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div ref={headerRef} className="mb-16">
+            <span className="label-upper text-text-muted mb-4 block">What We Do</span>
+            <h1 className="font-display text-h1 text-text-primary mb-4">Our Services</h1>
+            <p className="font-body text-body-lg text-text-muted max-w-2xl">
+              From intimate gatherings to grand celebrations, we provide end-to-end event solutions 
+              that combine luxury rentals with expert styling and seamless coordination.
+            </p>
           </div>
 
-          <div className="relative">
-            {/* Timeline Line (desktop) */}
-            <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-plum/20" />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
-              {processSteps.map((step, index) => (
-                <div key={index} className="process-step relative text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-plum flex items-center justify-center relative z-10">
-                    <span className="font-display text-2xl text-gold">{step.step}</span>
-                  </div>
-                  <h4 className="font-display text-lg text-text-primary mb-2">{step.title}</h4>
-                  <p className="font-body text-sm text-text-muted leading-relaxed">
-                    {step.description}
-                  </p>
+          {/* Services Grid */}
+          <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="service-card group bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="w-12 h-12 rounded-full bg-plum/10 flex items-center justify-center mb-6 group-hover:bg-plum/20 transition-colors">
+                  <service.icon className="w-6 h-6 text-plum" />
                 </div>
-              ))}
+                <h3 className="font-display text-xl text-text-primary mb-3">{service.title}</h3>
+                <p className="font-body text-sm text-text-muted leading-relaxed mb-6">
+                  {service.description}
+                </p>
+                <ul className="space-y-2">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 font-body text-sm text-text-primary">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Process Timeline */}
+          <div ref={processRef} className="mb-24">
+            <div className="text-center mb-12">
+              <span className="label-upper text-text-muted mb-4 block">How It Works</span>
+              <h2 className="font-display text-h2 text-text-primary">Our Process</h2>
+            </div>
+
+            <div className="relative">
+              {/* Timeline Line (desktop) */}
+              <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-plum/20" />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
+                {processSteps.map((step, index) => (
+                  <div key={index} className="process-step relative text-center">
+                    <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-plum flex items-center justify-center relative z-10">
+                      <span className="font-display text-2xl text-gold">{step.step}</span>
+                    </div>
+                    <h4 className="font-display text-lg text-text-primary mb-2">{step.title}</h4>
+                    <p className="font-body text-sm text-text-muted leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Pricing Info */}
-        <div className="bg-plum rounded-2xl p-8 lg:p-12 text-center">
-          <h2 className="font-display text-h2 text-white mb-4">Ready to Plan Your Event?</h2>
-          <p className="font-body text-body-lg text-white/70 max-w-xl mx-auto mb-8">
-            Delivery within Ogun State: ₦60,000 - ₦90,000. 
-            Setup/Breakdown Labor: ₦65,000 per hour. Security Deposit: 10% of total rental.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://wa.me/2348146056321?text=Hello%20Emis%20Events!%20I%27d%20like%20to%20discuss%20my%20event."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gold text-plum font-body font-semibold rounded-full hover:bg-gold/90 transition-all"
-            >
-              Get a Quote
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <Link
-              to="/inventory"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-body font-semibold rounded-full hover:bg-white/20 transition-all"
-            >
-              Browse Inventory
-            </Link>
+          {/* Pricing Info */}
+          <div className="bg-plum rounded-2xl p-8 lg:p-12 text-center">
+            <h2 className="font-display text-h2 text-white mb-4">Ready to Plan Your Event?</h2>
+            <p className="font-body text-body-lg text-white/70 max-w-xl mx-auto mb-8">
+              Delivery within Ogun State: ₦60,000 - ₦90,000. 
+              Setup/Breakdown Labor: ₦65,000 per hour. Security Deposit: 10% of total rental.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="https://wa.me/2348146056321?text=Hello%20Emis%20Events!%20I%27d%20like%20to%20discuss%20my%20event."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gold text-plum font-body font-semibold rounded-full hover:bg-gold/90 transition-all"
+              >
+                Get a Quote
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <Link
+                to="/inventory"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-body font-semibold rounded-full hover:bg-white/20 transition-all"
+              >
+                Browse Inventory
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
