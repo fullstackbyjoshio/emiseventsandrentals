@@ -1,5 +1,0 @@
-/robots.txt /robots.txt 200
-/sitemap.xml /sitemap.xml 200
-/og-image.jpg /og-image.jpg 200
-/assets/* /assets/:splat 200
-/* /index.html 200
