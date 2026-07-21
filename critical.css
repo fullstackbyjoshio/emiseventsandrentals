@@ -1,0 +1,61 @@
+/* Critical CSS - Above the fold only */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body { 
+  background: #F4EFE6; 
+  color: #2A1F2D; 
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+.relative { position: relative; }
+.w-full { width: 100%; }
+.h-screen { height: 100vh; }
+.overflow-hidden { overflow: hidden; }
+.bg-ivory { background-color: #F4EFE6; }
+.z-10 { z-index: 10; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.lg\:flex-row { flex-direction: row; }
+.h-full { height: 100%; }
+.h-\[45vh\] { height: 45vh; }
+.lg\:h-full { height: 100%; }
+.object-cover { object-fit: cover; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.justify-center { justify-content: center; }
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
+.font-body { font-family: 'Inter', system-ui, sans-serif; }
+.text-hero { font-size: clamp(2.5rem, 6vw, 5rem); }
+.text-h1 { font-size: clamp(2rem, 4vw, 3.5rem); }
+.text-body-lg { font-size: 1.125rem; line-height: 1.75; }
+.text-text-primary { color: #2A1F2D; }
+.text-text-muted { color: #6B5B6E; }
+.text-white { color: #fff; }
+.bg-plum { background-color: #5B0A5B; }
+.rounded-full { border-radius: 9999px; }
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-6 { gap: 1.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.max-w-md { max-width: 28rem; }
+.leading-relaxed { line-height: 1.625; }
+.leading-\[1\.05\] { line-height: 1.05; }
+.leading-\[1\.1\] { line-height: 1.1; }
+.tracking-\[0\.18em\] { letter-spacing: 0.18em; }
+.uppercase { text-transform: uppercase; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.hover\:bg-plum\/90:hover { background-color: rgba(91, 10, 91, 0.9); }
+.hover\:text-plum:hover { color: #5B0A5B; }
+.hover\:shadow-plum:hover { box-shadow: 0 4px 20px rgba(91, 10, 91, 0.15); }
+.hover\:scale-\[1\.02\]:hover { transform: scale(1.02); }
+.transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.vignette-overlay { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.25) 100%); }
+.gold-rule { height: 1px; background-color: #D4AF37; }
+.label-upper { font-family: 'Inter', system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; }
