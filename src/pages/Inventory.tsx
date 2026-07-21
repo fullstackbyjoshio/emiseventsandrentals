@@ -21,36 +21,36 @@ const categories = [
 ]
 
 const inventoryItems: InventoryItem[] = [
-  { id: 1, name: 'Flat Plate', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/inventory_tableware.jpg' },
-  { id: 2, name: 'Amala Bowl', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/Amala-Bowl.jpg' },
-  { id: 3, name: 'Charger Plate', price: '₦500', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/community_table_detail.jpg' },
-  { id: 4, name: 'Wine Bowl', price: '₦200', unit: 'per piece', category: 'Tableware', image: '/wine-bowl.jpg' },
-  { id: 5, name: 'Wine Bowl', price: '₦1,500', unit: 'per piece', category: 'Tableware', image: '/serving-dish-2.jpg' },
-  { id: 6, name: 'Chaffing Dish', price: '₦2,000', unit: 'per piece', category: 'Tableware', image: '/Serving-dish-1.jpg' },
-  { id: 7, name: 'Fabric (White)', price: '₦4,000', unit: 'per piece', category: 'Fabrics & Linens', image: '/inventory_textiles.jpg' },
-  { id: 8, name: 'Chair Cover', price: '₦80', unit: 'per piece', category: 'Fabrics & Linens', image: '/service_chairs.jpg' },
-  { id: 9, name: 'Table Cloth', price: '₦700', unit: 'per piece', category: 'Fabrics & Linens', image: '/Table-Cloth.jpg' },
-  { id: 11, name: 'Children Table', price: '₦500', unit: 'per piece', category: 'Chairs & Tables', image: '/styling_lounge.jpg' },
-  { id: 33, name: 'Executive Chairs', price: '₦5,000', unit: 'per piece', category: 'Chairs & Tables', image: '/executiive-chairs.jpg' },
-  { id: 13, name: 'Flower', price: '₦7,500', unit: 'per piece', category: 'Decor', image: '/flower.jpg' },
-  { id: 14, name: 'Flower Vase', price: '₦1,000', unit: 'per piece', category: 'Decor', image: '/Flower-vase.jpg' },
-  { id: 15, name: 'Rafia Flower Vase with leafs', price: '₦20,000', unit: 'per piece', category: 'Decor', image: '/rafia-flower-vase.jpg' },
-  { id: 16, name: 'Velvet Rose', price: '₦1,200', unit: 'per piece', category: 'Decor', image: '/velvet-rose.jpg' },
-  { id: 17, name: 'Chandelier', price: '₦3,000', unit: 'per piece', category: 'Decor', image: '/closing_chandelier.jpg' },
-  { id: 18, name: 'Balloon Arch', price: '₦25,000', unit: 'per piece', category: 'Decor', image: '/experience_flower_wall.jpg' },
-  { id: 19, name: 'Balloon Pump', price: '₦20,000', unit: 'per piece', category: 'Decor', image: '/Baloon-Pump.jpg' },
-  { id: 20, name: 'Walkway Arch', price: '₦5,000', unit: 'per piece', category: 'Decor', image: '/plan_floral_arch.jpg' },
-  { id: 21, name: 'Back Drop', price: '₦3,000', unit: 'per piece', category: 'Decor', image: '/back-drop.jpg' },
-  { id: 22, name: 'Hero Archway', price: '₦30,000', unit: 'per piece', category: 'Decor', image: '/hero_archway.jpg' },
-  { id: 23, name: '2-in-1 Vine Flower', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/2in1-vine-flower.jpg' },
-  { id: 24, name: '3-Head Rose', price: '₦1,800', unit: 'per piece', category: 'Decor', image: '/3head-rose.jpg' },
-  { id: 25, name: 'Cotton Flower', price: '₦6,500', unit: 'per piece', category: 'Decor', image: '/cotton-flower.jpg' },
-  { id: 26, name: 'Rafia Fan', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/handfan.jpg' },
-  { id: 27, name: "Plastic Baby's Breath", price: '₦1,000', unit: 'per stem', category: 'Decor', image: '/plastic-baby-breath.jpg' },
-  { id: 28, name: 'Process Bouquet', price: '₦12,000', unit: 'per piece', category: 'Decor', image: '/process_bouquet.jpg' },
-  { id: 32, name: 'Party Popper', price: '₦2,000', unit: 'per piece', category: 'Decor', image: '/Party-popper.jpg' },
-  { id: 29, name: 'Chafing Dish (Large)', price: '₦500', unit: 'per piece', category: 'Catering Equipment', image: '/statement_bar_cart.jpg' },
-  { id: 31, name: 'Cooling Chest', price: '₦20,000', unit: 'per piece', category: 'Catering Equipment', image: '/Cooling-Chest.jpg' },
+  { id: 1, name: 'Flat Plate', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/inventory_tableware.webp' },
+  { id: 2, name: 'Amala Bowl', price: '₦1,000', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/Amala-Bowl.webp' },
+  { id: 3, name: 'Charger Plate', price: '₦500', unit: 'per dozen (12 pcs)', category: 'Tableware', image: '/community_table_detail.webp' },
+  { id: 4, name: 'Wine Bowl', price: '₦200', unit: 'per piece', category: 'Tableware', image: '/wine-bowl.webp' },
+  { id: 5, name: 'Wine Bowl', price: '₦1,500', unit: 'per piece', category: 'Tableware', image: '/serving-dish-2.webp' },
+  { id: 6, name: 'Chaffing Dish', price: '₦2,000', unit: 'per piece', category: 'Tableware', image: '/Serving-dish-1.webp' },
+  { id: 7, name: 'Fabric (White)', price: '₦4,000', unit: 'per piece', category: 'Fabrics & Linens', image: '/inventory_textiles.webp' },
+  { id: 8, name: 'Chair Cover', price: '₦80', unit: 'per piece', category: 'Fabrics & Linens', image: '/service_chairs.webp' },
+  { id: 9, name: 'Table Cloth', price: '₦700', unit: 'per piece', category: 'Fabrics & Linens', image: '/Table-Cloth.webp' },
+  { id: 11, name: 'Children Table', price: '₦500', unit: 'per piece', category: 'Chairs & Tables', image: '/styling_lounge.webp' },
+  { id: 33, name: 'Executive Chairs', price: '₦5,000', unit: 'per piece', category: 'Chairs & Tables', image: '/executive-chairs.webp' },
+  { id: 13, name: 'Flower', price: '₦7,500', unit: 'per piece', category: 'Decor', image: '/flower.webp' },
+  { id: 14, name: 'Flower Vase', price: '₦1,000', unit: 'per piece', category: 'Decor', image: '/Flower-vase.webp' },
+  { id: 15, name: 'Rafia Flower Vase with leafs', price: '₦20,000', unit: 'per piece', category: 'Decor', image: '/rafia-flower-vase.webp' },
+  { id: 16, name: 'Velvet Rose', price: '₦1,200', unit: 'per piece', category: 'Decor', image: '/velvet-rose.webp' },
+  { id: 17, name: 'Chandelier', price: '₦3,000', unit: 'per piece', category: 'Decor', image: '/closing_chandelier.webp' },
+  { id: 18, name: 'Balloon Arch', price: '₦25,000', unit: 'per piece', category: 'Decor', image: '/experience_flower_wall.webp' },
+  { id: 19, name: 'Balloon Pump', price: '₦20,000', unit: 'per piece', category: 'Decor', image: '/Baloon-Pump.webp' },
+  { id: 20, name: 'Walkway Arch', price: '₦5,000', unit: 'per piece', category: 'Decor', image: '/plan_floral_arch.webp' },
+  { id: 21, name: 'Back Drop', price: '₦3,000', unit: 'per piece', category: 'Decor', image: '/back-drop.webp' },
+  { id: 22, name: 'Hero Archway', price: '₦30,000', unit: 'per piece', category: 'Decor', image: '/hero_archway.webp' },
+  { id: 23, name: '2-in-1 Vine Flower', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/2in1-vine-flower.webp' },
+  { id: 24, name: '3-Head Rose', price: '₦1,800', unit: 'per piece', category: 'Decor', image: '/3head-rose.webp' },
+  { id: 25, name: 'Cotton Flower', price: '₦6,500', unit: 'per piece', category: 'Decor', image: '/cotton-flower.webp' },
+  { id: 26, name: 'Rafia Fan', price: '₦4,500', unit: 'per piece', category: 'Decor', image: '/handfan.webp' },
+  { id: 27, name: "Plastic Baby's Breath", price: '₦1,000', unit: 'per stem', category: 'Decor', image: '/plastic-baby-breath.webp' },
+  { id: 28, name: 'Process Bouquet', price: '₦12,000', unit: 'per piece', category: 'Decor', image: '/process_bouquet.webp' },
+  { id: 32, name: 'Party Popper', price: '₦2,000', unit: 'per piece', category: 'Decor', image: '/Party-popper.webp' },
+  { id: 29, name: 'Chafing Dish (Large)', price: '₦500', unit: 'per piece', category: 'Catering Equipment', image: '/statement_bar_cart.webp' },
+  { id: 31, name: 'Cooling Chest', price: '₦20,000', unit: 'per piece', category: 'Catering Equipment', image: '/Cooling-Chest.webp' },
 ]
 
 const uniqueStaticItemsMap = new Map<string, typeof inventoryItems[0]>()
@@ -286,6 +286,9 @@ export default function Inventory() {
                     src={item.image}
                     alt={item.name}
                     className="w-full max-h-[280px] object-contain group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    width={400}
+                    height={300}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <button
@@ -368,6 +371,9 @@ export default function Inventory() {
                           src={item.image}
                           alt={item.name}
                           className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                          loading="lazy"
+                          width={64}
+                          height={64}
                         />
                         <div className="flex-1 min-w-0">
                           <h4 className="font-body font-medium text-text-primary truncate">{item.name}</h4>

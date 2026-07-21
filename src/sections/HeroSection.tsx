@@ -137,9 +137,12 @@ export default function HeroSection() {
           style={{ opacity: 0 }}
         >
           <img
-            src="/hero_archway.jpg"
+            src="/hero_archway.webp"
             alt="Luxury event venue"
             className="w-full h-full object-cover"
+            loading="eager"
+            width={1200}
+            height={800}
           />
           <div className="vignette-overlay" />
         </div>

@@ -117,9 +117,12 @@ export default function About() {
           <div ref={storyRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
               <img
-                src="/hero_archway.jpg"
+                src="/hero_archway.webp"
                 alt="Emis Events"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                width={800}
+                height={600}
               />
               <div className="vignette-overlay" />
             </div>

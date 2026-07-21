@@ -124,6 +124,9 @@ export default function SplitSection({
         src={image}
         alt={label}
         className="w-full h-full object-cover"
+        loading="lazy"
+        width={800}
+        height={600}
       />
       <div className="vignette-overlay" />
     </div>
