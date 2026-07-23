@@ -124,13 +124,13 @@ export default function Home() {
     <>
       <Helmet>
         <title>Event Rentals & Styling in Ogun State | Emis Events and Rentals</title>
-        <meta name="description" content="Premium event rentals, coordination, and styling in Ilisan Remo, Ogun State, Nigeria. Chairs, tents, decor & more. Book your event today." />
+        <meta name="description" content="Premium event rentals and styling in Ogun State, Nigeria. Chairs, tents, decor & more. Call +234 813 130 3059." />
         <meta name="keywords" content="event rentals, party rentals, wedding styling, Ogun State, Ilisan Remo, Nigeria, chair rental, tent rental, event decor" />
         <link rel="canonical" href="https://emiseventsandrentals.com/" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Event Rentals & Styling in Ogun State | Emis Events and Rentals" />
-        <meta property="og:description" content="Premium event rentals, coordination, and styling in Ilisan Remo, Ogun State, Nigeria." />
+        <meta property="og:description" content="Premium event rentals and styling in Ogun State, Nigeria. Chairs, tents, decor & more. Call +234 813 130 3059." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://emiseventsandrentals.com/" />
         <meta property="og:image" content="https://emiseventsandrentals.com/og-image.jpg" />
@@ -138,7 +138,7 @@ export default function Home() {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Event Rentals & Styling in Ogun State | Emis Events and Rentals" />
-        <meta name="twitter:description" content="Premium event rentals, coordination, and styling in Ilisan Remo, Ogun State, Nigeria." />
+        <meta name="twitter:description" content="Premium event rentals and styling in Ogun State, Nigeria. Chairs, tents, decor & more. Call +234 813 130 3059." />
         <meta name="twitter:image" content="https://emiseventsandrentals.com/og-image.jpg" />
       </Helmet>
 
